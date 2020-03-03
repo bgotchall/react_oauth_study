@@ -39,6 +39,8 @@ import { Router, Route, Switch } from "react-router-dom";
 import Profile from "./components/Profile";
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
+import Button from '@material-ui/core/Button';
+
 
 function App() {
   return (
@@ -59,3 +61,5 @@ function App() {
 }
 
 export default App;
+
+
