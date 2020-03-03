@@ -33,16 +33,23 @@
 
 import React from "react";
 import NavBar from "./components/NavBar";
+import PageContent from "./components/PageContent";
 
 // New - import the React Router components, and the Profile page component
 import { Router, Route, Switch } from "react-router-dom";
+
 import Profile from "./components/Profile";
+import Home from './components/Home';
+import DumbHome from './components/DumbHome';
 import history from "./utils/history";
 import PrivateRoute from "./components/PrivateRoute";
 import Button from '@material-ui/core/Button';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+
+
   return (
     <div className="App">
       {/* Don't forget to include the history module */}
@@ -54,8 +61,12 @@ function App() {
           <Route path="/" exact />
           {/* <Route path="/profile" component={Profile} /> */}
           <PrivateRoute path="/profile" component={Profile} />
+          <PrivateRoute path="/home" component={DumbHome} />
+          {/* <PageContent /> */}
         </Switch>
       </Router>
+
+
     </div>
   );
 }
