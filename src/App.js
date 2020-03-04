@@ -3,13 +3,14 @@
 
 import React from "react";
 import NavBar from "./components/NavBar";
+import SecureNavBar from "./components/SecureNavBar";
 import { useAuth0 } from "./react-auth0-spa";
 
 
 // New - import the React Router components, and the Profile page component
 import { Router, Route, Switch } from "react-router-dom";
 
-import Profile from "./components/Profile";
+import Profile from "./components/pages/Profile";
 import Home from './components/pages/Home';
 import Photos from './components/pages/Photos';
 import PublicHome from './components/pages/PublicHome';
@@ -30,16 +31,19 @@ function App() {
       {/* Don't forget to include the history module */}
       <Router history={history}>
         <header>
-          <NavBar />
+          {!isAuthenticated && <NavBar />}
+          {isAuthenticated && <SecureNavBar />}
+
         </header>
 
         {/* <Route exact path="/" component={Home} />
         <Route exact path="/photos" component={Photos} /> */}
-        
-        {!isAuthenticated && <Route exact path="/" component= {PublicHome} />  }
-        {isAuthenticated && <Route exact path="/" component= {Home} />  }
-        {isAuthenticated && <Route exact path="/photos" component= {Photos} />  }
-        {isAuthenticated && <Route exact path="/calendar" component= {Calendar} />  }
+
+        {!isAuthenticated && <Route exact path="/" component={PublicHome} />}
+        {isAuthenticated && <Route exact path="/" component={Home} />}
+        {isAuthenticated && <Route exact path="/photos" component={Photos} />}
+        {isAuthenticated && <Route exact path="/calendar" component={Calendar} />}
+        {isAuthenticated && <Route exact path="/profile" component={Profile} />}
 
 
       </Router>

@@ -10,9 +10,11 @@ const AuthLink = (props) => {
 
     return (
         <>
+        {isAuthenticated && (
             < Link to={props.route} className={location.pathname ===props.route ? "nav-link active" : "nav-link"} >
             {props.name}
         </Link >
+        )}
         </>
     )      
    

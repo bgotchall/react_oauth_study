@@ -15,14 +15,25 @@ import FormControl from 'react-bootstrap/FormControl';
 import AuthLink from '../utils/AuthLink';
 
 
-const NavBar = () => {
+const SecureNavBar = () => {
     const { user, loading, isAuthenticated, loginWithRedirect, logout } = useAuth0();
     const location = useLocation();
     const [showAvatar, setShowAvatar] = useState(false);
     const [avatarName, setAvatarName] = useState();
     const [avatarPic, setAvatarPic] = useState();
 
-   
+    // useEffect(() => {
+    //     // Update the document title using the browser API
+    //     if (!user) {
+    //         setShowAvatar(true);
+    //         setAvatarName(user.name);
+    //         setAvatarPic(user.picture);
+    //     }
+    // });
+
+    if (loading || !user) {
+        return <div>Loading...</div>;
+      }
     return (
         <>
 
@@ -42,7 +53,7 @@ const NavBar = () => {
                         <AuthLink name="Profile" route="/profile" ></AuthLink>
 
                         {/* {isAuthenticated && <PrivateRoute path="/profile" component={Profile} />} */}
-
+                        
                         {isAuthenticated && (
                             <NavDropdown title="Admin" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="/membersManage">Manage Members</NavDropdown.Item>
@@ -51,16 +62,18 @@ const NavBar = () => {
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
                             </NavDropdown>
-
+                            
                         )}
+                        
                     </Nav>
 
-
+                    <Avatar alt={user.name} src={user.picture} />
                     {!isAuthenticated && <Button variant="contained" color="primary" onClick={() => loginWithRedirect({})}>Log in</Button>}
 
                     {isAuthenticated && <Button variant="contained" color="primary" onClick={() => logout()}>Log out</Button>}
 
-                   
+                    
+                    
 
                     <Form inline>
                         <FormControl type="text" placeholder="Search" className="mr-sm-2" />
@@ -74,9 +87,9 @@ const NavBar = () => {
     );
 };
 
-export default NavBar;
+export default SecureNavBar;
 
 
-/////
+
 
 
